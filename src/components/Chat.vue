@@ -1,31 +1,38 @@
 <script lang="ts" setup>
-import { onMounted, ref } from 'vue'
+import { onMounted, onUnmounted, ref } from 'vue'
 
+function updateConversation() {
+  console.log('updateConversation')
+}
 function tapConversation() {
-  console.log('tapConversation');
+  console.log('tapConversation')
 }
+function deleteConversation() {
+  console.log('deleteConversation')
+}
+
 function tapMessage() {
-  console.log('tapMessage');
+  console.log('tapMessage')
 }
-const conversationRef = ref<HTMLElement>()
-const messageListRef = ref<HTMLElement>()
-onMounted(() => {
-  conversationRef.value?.addEventListener('tapConversation', tapConversation)
-  messageListRef.value?.addEventListener('tapMessage', tapMessage)
-})
 </script>
 
 <template>
   <div class="chat-page-con">
     <div class="wrapper-left">
-      <conversation-list ref="conversationRef" base-size="10px" />
+      <conversation-list
+        class="conversation-list"
+        @updateConversation="updateConversation"
+        @tapConversation="tapConversation"
+        @deleteConversation="deleteConversation"
+        base-size="10px"
+      />
     </div>
     <div class="wrapper-right">
       <div class="chat-top">
-        <message-list ref="messageListRef" base-size="10px" />
+        <message-list class="message-list" @tapMessage="tapMessage" base-size="10px" />
       </div>
       <div class="chat-bottom">
-        <message-editor base-size="10px" />
+        <message-editor class="message-editor" base-size="10px" />
       </div>
     </div>
   </div>
@@ -36,24 +43,24 @@ onMounted(() => {
   flex: 1;
   display: flex;
   height: 100%;
-  border: 10px solid red;
+  .conversation-list, .message-list, .message-editor {
+    box-sizing: content-box;
+  }
   .wrapper-left {
     width: 300px;
-    border: 10px solid blue;
+    height: 100%;
   }
   .wrapper-right {
     flex: 1;
     display: flex;
     flex-flow: column nowrap;
     .chat-top {
-      flex: 1;
       width: 100%;
-      border: 10px solid yellow;
+      height: calc(100% - 220px);
     }
     .chat-bottom {
       width: 100%;
-      height: 100px;
-      border: 10px solid purple;
+      height: 220px;
     }
   }
 }
