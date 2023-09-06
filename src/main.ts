@@ -6,6 +6,10 @@ import './samples/node-api'
 // 融云
 import * as RongIMLib from '@rongcloud/imlib-next'
 import { defineCustomElements, imkit } from '@rongcloud/imkit'
+import custom_service from "@/api/custom_service";
+import custom_message from "@/api/custom_message";
+import custom_conversation from "@/api/custom_conversation";
+import customDisplayMessage from "@/api/will_message";
 
 defineCustomElements()
 
@@ -23,12 +27,11 @@ const app = createApp({
     RongIMLib.init(libOption);
     imkit.init({
       appkey: APPKEY,
-      // service: custom_service,
+      service: custom_service,
       libOption: libOption,
-      // customIntercept: custom_conversation,
-      // customMessage: custom_message,
-      // customIntercept: custom_conversation,
-      // customDisplayMessage: customDisplayMessage
+      customIntercept: custom_conversation,
+      customMessage: custom_message,
+      customDisplayMessage: customDisplayMessage
     });
 
     const PersonMessage = imkit.registerMessageType('kit:person', true, true, [], false)
