@@ -15,7 +15,16 @@ export default defineConfig(({ command }) => {
 
   return {
     plugins: [
-      vue(),
+      vue({
+        template: {
+          compilerOptions: {
+            isCustomElement: (tag) =>
+              ["conversation-list", "message-list", "message-editor"].includes(
+                tag
+              )
+          }
+        }
+      }),
       electron([
         {
           // Main-Process entry file of the Electron App.
