@@ -28,7 +28,7 @@
     "@rongcloud/imkit": "^5.6.6",
     "@rongcloud/imlib-next": "^5.8.3",
     "@vitejs/plugin-vue": "^4.3.3",
-    "electron": "^26.0.0",
+    "electron": "^27.1.3",
     "electron-builder": "^24.6.3",
     "less": "^4.2.0",
     "typescript": "^5.1.6",
